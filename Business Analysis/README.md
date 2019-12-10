@@ -1,7 +1,8 @@
 # Feature List - Music Retrieval Info #
 
 Context specific
-  * Place 
+  * Location (gym,work,car,etc)
+  * Event (working,commuting,training,etc)
   * Timestamp - part of the day 
   
 User specific
