@@ -5,3 +5,4 @@
 
    * Use a registered application to connect to Spotify and retrieve music track information (see library Spotipy).
    * Define a user preference playlist and retrieve song metadata.
+   * Investigate audio temporal or spectral features along with Spotify and user metadata
