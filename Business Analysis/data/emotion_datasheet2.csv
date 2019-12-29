@@ -1,0 +1,94 @@
+User age ;41;;;
+User gender;Male;;;
+"User education level
+";Highest;;;"
+"
+Song;"Time of the day
+";Activity;Mood;Location
+Eurythmics - Sweet Dreams;Morning;Driving;Excited;Outdoor
+3 Doors Down - Kryptonite;Morning;Driving;Happy;Outdoor
+Alice Cooper - Poison;Morning;Driving;Excited;Outdoor
+AC/DC - Highway to Hell;Morning;Driving;Pleased;Outdoor
+Scorpions - Rock you like a hurricane;Morning;Driving;Pleased;Outdoor
+AC/DC - Thunderstruck;Morning;Driving;Excited;Outdoor
+Judas Priest - Breaking The Law;Morning;working out;Excited;Outdoor
+Rolling Stones - Paint it, Black;Morning;working out;Relaxed;Outdoor
+Led Zeppelin - Kashmir;Morning;working out;Excited;Outdoor
+Def Lepard - Pour some sugar on me;Morning;working out;Pleased;Outdoor
+Iggy Oio - Lust for Life;Morning;working out;Happy;Outdoor
+The Police - Every Breath You Take;Morning;working out;Sad;Outdoor
+Iron Maiden - The Trooper;Morning;working out;Excited;Outdoor
+Rage Against The Machince - Killining In The Name;Morning;working out;Excited;Outdoor
+System of A Down - Toxicity;Morning;working out;Calm;Outdoor
+The Offspring - Pretty Fly;Morning;working out;Happy;Outdoor
+Sex Pistols - Anarchy in The UK;Morning;working out;Excited;Outdoor
+Iron Maiden - Afraid to Shoot Strangers;Morning;working out;Relaxed;Outdoor
+Ξύλινα Σπαθιά - Λιωμένο Παγωτό;Midday;Working;Select;Work
+Λευκή Συμφωνία - Το φεγγάρι αιμοραγεί;Midday;Working;Sad;Work
+Γυμνά Καλώδια - Θέλω;Midday;Working;Excited;Work
+Υπόγεια Ρεύματα - Ασημένια Σφήκα;Midday;Working;Excited;Work
+Τζίμης Πανούσης - Νεοέλληνας;Midday;Working;Excited;Work
+Τζίμης Πανούσης - Ερωτικό;Midday;Working;Excited;Work
+Ξύλινα Σπαθιά - Ο βασιλιάς της σκόνης;Midday;Working;Calm;Work
+Κολάζ - Ίχνη του Ανέμου;Midday;Working;Select;Work
+Τζίμης Πανούσης - Κάγκελα Παντού;Midday;Working;Calm;Work
+Λευκές Νύχτες - Θέλω να σε δω;Midday;Working;Happy;Work
+Λευκές Νύχτες - Σαν ηχώ;Midday;Working;Sad;Work
+Μάσκες - Το καράβι του νότου;Midday;Working;Calm;Work
+Μοντάζ - Τι κόσμος είναι αυτός;Midday;Working;Sad;Work
+Ακέστορες - Στη Σαμαρκάνδη;Midday;Working;Calm;Work
+Αχαιοί - Πυξίδα;Midday;Working;Happy;Work
+Τρύπες - Εδώ;Midday;Working;Excited;Work
+Τρύπες - Πάρτυ στο 13ο όροφο;Midday;Working;Happy;Work
+Τρύπες - Τα κανονικά παιδιά;Midday;Working;Excited;Work
+15 50 - Τις νύχτες γίνομαι παιδί;Midday;Working;Sad;Work
+Μιλτιάδης Πασχαλίδης - Βυθισμένες ’γκυρες;Midday;Working;Sad;Work
+Ξυλούρης Νίκος - Ήτανε μια φορά;Midday;Working;Sad;Work
+Locomondo - Trendy Λίτσα;Midday;Working;Happy;Work
+Χαρούλης Γιάννης - Ξενύχτησα στην πόρτα σου;Midday;Working;Calm;Work
+Χαιρέτης Γιώργος - Το αηδόνι;Midday;Working;Happy;Work
+Ξύλινα Σπαθιά - Ένα παράξενο τραγούδι;Midday;Working;Happy;Work
+Ξύλινα Σπαθιά - Ρομπότ;Midday;Working;Happy;Work
+Μωρά στη Φωτιά - Κάτω στην πόλη;Midday;Working;Select;Work
+Social Waste - Του ’ρη;Midday;Working;Sad;Work
+Social Waste - Το χιπ χοπ της Μεσογείου;Midday;Working;Calm;Work
+Μωρά στη Φωτιά - Μανιφέστο;Midday;Working;Excited;Work
+Μωρά στη Φωτιά - Αδέλφια στην κόλαση;Midday;Working;Excited;Work
+Υπόγεια Ρεύματα - Ύμνος 414;Midday;Working;Excited;Work
+Active Member - Για τα αδέρφια που χαθήκανε νωρίς;Midday;Working;Sad;Work
+Active Member - Μύθοι του βάλτου;Midday;Working;Calm;Work
+Μωρά στη Φωτιά - Βαβυλωνία;Midday;Working;Excited;Work
+Ξύλινα Σπαθιά - Λόλα;Midday;Working;Happy;Work
+Ριφιφί - Φίλα με;Midday;Working;Calm;Work
+Νίκος Ζιώγαλας - Σαν σταρ του σινεμά;Midday;Working;Peaceful;Work
+Ριφιφί - Χάνομαι;Midday;Working;Pleased;Work
+Μάσκες - Κάτι πιο μικρό από το τίποτα;Midday;Working;Calm;Work
+Magic De Spell - Διακοπές στο Sarajevo;Midday;Working;Sad;Work
+De Facto - Όλης της γης τα μυστικά;Midday;Working;Peaceful;Work
+Μιλτιάδης Πασχαλίδης - Πηνελόπη;Midday;Working;Calm;Work
+Stavento - Πηδάω τα κύματα;Midday;Working;Happy;Work
+Χάσμα - Κλώνος;Midday;Working;Angry;Work
+Μάσκες - Σαν όνειρο;Midday;Working;Sad;Work
+Οι φόβοι του πρίγκηπα - Η νύφη που φορούσε μαύρα;Midday;Working;Sad;Work
+Πίσσα & Πούπουλα - Δυο δευτερόλεπτα;Midday;Working;Sad;Work
+Locomondo - 80's;Midday;Working;Calm;Work
+Κάρμα - Το χρέος;Midday;Working;Angry;Work
+Panx Romana - Καταστολή στο περιθώριο;Midday;Working;Nervous;Work
+Κίτρινα ποδήλατα - ’μα τα πάρω;Midday;Working;Angry;Work
+Κίτρινα ποδήλατα - Ταξιδεύω το εγώ μου;Midday;Working;Peaceful;Work
+Αλκίνοος Ιωαννίδης - Θα'μια κοντά σου;Midday;Working;Sad;Work
+Παύλος Σιδηρόπουλος - Να μ'αγαπάς;Midday;Working;Sad;Work
+Παύλος Σιδηρόπουλος - Ηλεκτρικός Θησέας;Midday;Working;Peaceful;Work
+Παύλος Σιδηρόπουλος - Η φαντασία στην εξουσία;Midday;Working;Peaceful;Work
+Κατσιμήχα - Του έρωτα;Midday;Working;Excited;Work
+Dire Straits - Walk of Life;Afternoon;working out;Peaceful;Outdoor
+Led Zeppelin - Whole Lotta Love;Afternoon;working out;Excited;Outdoor
+Queen - We are the champions;Afternoon;working out;Happy;Outdoor
+Nirvana - Smells like Teen spirit;Afternoon;working out;Excited;Outdoor
+R.E.M. - Losing my religion;Afternoon;working out;Peaceful;Outdoor
+Mettalica - Nothing Else Matters;Afternoon;working out;Sad;Outdoor
+Pink Floyd - Another brick in the wall;Afternoon;working out;Angry;Outdoor
+The Who - My Generation;Afternoon;working out;Happy;Outdoor
+U2 - Sunday Bloody Sunday;Afternoon;working out;Angry;Outdoor
+Violent Femmes - Kiss off;Afternoon;working out;Excited;Outdoor
+Mettalica - Unforgiven;Afternoon;working out;Sad;Outdoor
