@@ -32,9 +32,10 @@ def spotify_correlations(df):
 
 
 def preprocess_datasheet(df, users=[]):
-    df['User'] = df['User'].astype(str)
-    if(len(users)>0):
-        df = df.loc[df['User'] in users]
+    df['User'] = df['User'].astype(int).astype(str)
+    if(len(users)>0 and users[0] != '0'):
+        # ask for correlations of specific user
+        df = df[df['User'].isin(users)]
     df = df.dropna(axis=0)
 
     loudness = df.take([3], axis=1).values
@@ -46,8 +47,8 @@ def preprocess_datasheet(df, users=[]):
     df = df.iloc[1:]
     return df
 
-
-
+# Predict considering all users: CorrelationsGenerator.py -p spotify
+# Predict considering user 1: CorrelationsGenerator.py -p spotify -u 1
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--platform', '-p', help="spotify or youtube", type=str)
@@ -55,6 +56,5 @@ if __name__ == '__main__':
 
     args = parser.parse_args(sys.argv[1:])
     platform = args.platform #spotify or youtube
-    users = str(args.users).split(',') #ask for correlations of specific user
-    #Predict personal mood according to the spotify metadata
+    users = str(args.users).split(',') #for all users the users parameter is ['0']
     main(platform, users)
