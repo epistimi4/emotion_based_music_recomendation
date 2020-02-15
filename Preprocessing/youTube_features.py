@@ -44,12 +44,11 @@ def extract_features(song_title, row_count):
         s = audioBasicIO.stereo_to_mono(s)
         # extract short term features
         df['song-artist'][row_count] = song_title.split('.')[0]
-        [f, f_names] = ShortTermFeatures.feature_extraction(s, fs, 0.050 * fs, 0.025 * fs)
+        [f, f_names] = ShortTermFeatures.feature_extraction(s, fs, fs, 0.5*fs)#0.050 * fs, 0.025 * fs)
         counter = 0
         #for every vector find mean, std, min, max
         for feature in f:
-            np.mean(feature)
-            print(f_names[counter] + "_mean")
+            print(np.mean(feature))
             #df[row_count][f_names[counter] + "_mean"].append(1)
             df[f_names[counter]+"_mean"][row_count] = np.mean(feature)
             df[f_names[counter] +"_std"][row_count] = np.std(feature)
@@ -63,7 +62,7 @@ def extract_features(song_title, row_count):
 files = find_all_files()
 index = range(len(files))
 df = pandas.DataFrame(index = index, columns = new_feature_names)
-df = df.fillna(0)
+#df = df.fillna(0)
 counter = 0
 for file in files:
     extract_features("E:\\song_conv2\\" + file, counter)
