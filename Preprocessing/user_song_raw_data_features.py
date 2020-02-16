@@ -69,12 +69,12 @@ for file in user_files:
                 data_available = True
         if data_available:
             df_final.at[row_counter, 'gender'] = df_user.at[user_file_row, 'gender']
-            df_final[row_counter, 'age'] = df_user.at[user_file_row, 'age']
-            df_final[row_counter, 'location'] = df_user.at[user_file_row, 'location']
-            df_final[row_counter, 'mood'] = df_user.at[user_file_row, 'mood']
-            df_final[row_counter, 'activity'] = df_user.at[user_file_row, 'activity']
-            df_final[row_counter, 'period'] = df_user.at[user_file_row, 'period']
-            df_final[row_counter, 'user_id'] = df_user.at[user_file_row, 'Id']
+            df_final.at[row_counter, 'age'] = df_user.at[user_file_row, 'age']
+            df_final.at[row_counter, 'location'] = df_user.at[user_file_row, 'location']
+            df_final.at[row_counter, 'mood'] = df_user.at[user_file_row, 'mood']
+            df_final.at[row_counter, 'activity'] = df_user.at[user_file_row, 'activity']
+            df_final.at[row_counter, 'period'] = df_user.at[user_file_row, 'period']
+            df_final.at[row_counter, 'user_id'] = df_user.at[user_file_row, 'Id']
             row_counter = row_counter + 1
         user_file_row = user_file_row + 1
 df_final.to_csv("C:\\Users\\epistimi\\Documents\\DataSience\\Multimodal\\emotion_based_music_recomendation\\Business Analysis\\data\\youtube_metadata_per_user.csv")
