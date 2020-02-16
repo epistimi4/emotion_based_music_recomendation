@@ -20,13 +20,12 @@ feature_names += ["mfcc_{0:d}".format(mfcc_i)
                   for mfcc_i in range(1, n_mfcc_feats + 1)]
 feature_names += ["chroma_{0:d}".format(chroma_i)
                   for chroma_i in range(1, n_chroma_feats)]
+feature_names.append("chroma_std")
 for feature_name in feature_names:
     new_feature_names.append(feature_name+"_mean")
     new_feature_names.append(feature_name + "_std")
     new_feature_names.append(feature_name + "_min")
     new_feature_names.append(feature_name + "_max")
-
-feature_names.append("chroma_std")
 
 
 def find_all_files():
@@ -36,27 +35,24 @@ def find_all_files():
 
 
 def extract_features(song_title, row_count):
-    try:
-        global df
-        # read machine sound
-        fs, s = audioBasicIO.read_audio_file(song_title)
-        duration = len(s) / float(fs)
-        s = audioBasicIO.stereo_to_mono(s)
-        # extract short term features
-        df['song-artist'][row_count] = song_title.split('.')[0]
-        [f, f_names] = ShortTermFeatures.feature_extraction(s, fs, fs, 0.5*fs)#0.050 * fs, 0.025 * fs)
-        counter = 0
-        #for every vector find mean, std, min, max
-        for feature in f:
-            print(np.mean(feature))
-            #df[row_count][f_names[counter] + "_mean"].append(1)
-            df[f_names[counter]+"_mean"][row_count] = np.mean(feature)
-            df[f_names[counter] +"_std"][row_count] = np.std(feature)
-            df[f_names[counter] +"_min"][row_count] = np.amin(feature)
-            df[f_names[counter] +"_max"][row_count] = np.amax(feature)
-            counter = counter +1
-    except:
-        print("lossing song... ", song_title)
+    global df
+    # read machine sound
+    fs, s = audioBasicIO.read_audio_file(song_title)
+    duration = len(s) / float(fs)
+    s = audioBasicIO.stereo_to_mono(s)
+    # extract short term features
+    df['song-artist'][row_count] = song_title.split('.')[0]
+    [f, f_names] = ShortTermFeatures.feature_extraction(s, fs, 2*fs, fs)#0.050 * fs, 0.025 * fs)
+    counter = 0
+    #for every vector find mean, std, min, max
+    for feature in f:
+        #print(np.mean(feature))
+        #df[row_count][f_names[counter] + "_mean"].append(1)
+        df[f_names[counter]+"_mean"][row_count] = np.mean(feature)
+        df[f_names[counter] +"_std"][row_count] = np.std(feature)
+        df[f_names[counter] +"_min"][row_count] = min(feature)
+        df[f_names[counter] +"_max"][row_count] = max(feature)
+        counter = counter +1
     return 0
 
 files = find_all_files()
