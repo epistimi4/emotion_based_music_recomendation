@@ -29,7 +29,7 @@ for feature_name in feature_names:
 
 
 def find_all_files():
-    path = "E:\\song_conv2"
+    path = "E:\\song_conv"
     music_files = [f for f in os.listdir(path) if f.endswith('wav')]
     return music_files
 
@@ -61,7 +61,7 @@ df = pandas.DataFrame(index = index, columns = new_feature_names)
 #df = df.fillna(0)
 counter = 0
 for file in files:
-    extract_features("E:\\song_conv2\\" + file, counter)
+    extract_features("E:\\song_conv\\" + file, counter)
     counter = counter + 1
 df.to_csv("C:\\Users\\epistimi\\Documents\\DataSience\\Multimodal\\emotion_based_music_recomendation\\Business Analysis\\data\\you_tube_metadata.csv")
 
