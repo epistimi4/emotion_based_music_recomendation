@@ -21,8 +21,8 @@ def unify_classes(df):
     return df
 
 def plot_confusion_matrix(Y, predictions,path):
-    cf_matrix = confusion_matrix(predictions, Y.values.ravel())
-    classes = np.unique(Y.values)
+    cf_matrix = confusion_matrix(predictions, Y)
+    classes = np.unique(Y)
     fig = plt.figure(figsize=(50,50))
     sn.set(font_scale=1.5)
     mood_matx = sn.heatmap(cf_matrix / np.sum(cf_matrix), annot=True, xticklabels=classes, yticklabels=classes,

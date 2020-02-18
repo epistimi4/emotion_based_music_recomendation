@@ -10,6 +10,7 @@ from sklearn.preprocessing import LabelEncoder
 import prediction.Utilities as utilities
 
 FIGURES_PATH = "prediction/figures/"
+le = LabelEncoder()
 
 def load_and_preprocess_data(dataset_path,users=[]):
     # Load data
@@ -20,6 +21,10 @@ def load_and_preprocess_data(dataset_path,users=[]):
         df = df[df['user_id'].isin(users)]
 
     df = df.dropna(axis=0)
+
+    num_users = len(np.unique(df['user_id'].values))
+    print("{} songs listened by {} users".format(df.shape[0]-1, num_users))
+
     predictors = [2, 6, 10, 14, 18,22,26,30,34,38,42,46,50,54,58,62,66,70,74,78,82,86,90,94,98,102,106,110,114,118,122,126,130,134]
     X = df.take(predictors, axis=1)  # predictors
     X = X.iloc[1:].values
@@ -46,7 +51,7 @@ def load_and_preprocess_data(dataset_path,users=[]):
     print("We have {} unique classes: {}".format(num_classes, classes))
 
     # encode the labels, converting them from strings to integers
-    le = LabelEncoder()
+
     y_train = le.fit_transform(y_train)
     y_test = le.fit_transform(y_test)
 
@@ -62,43 +67,36 @@ def load_and_preprocess_data(dataset_path,users=[]):
     return (x_train, y_train), (x_test, y_test)
 
 #Build the Feed forward model
-def build_and_compile_model(optimizer = 'adam', learn_rate=0.01, momentum=0.8):
+#import kfold validation by sklearn into keras
+from keras.wrappers.scikit_learn import KerasClassifier
+from sklearn.model_selection import cross_val_score, cross_val_predict, cross_validate
+def build_classifier():
     model = Sequential()
-    model.add(Dense(484, activation='relu', input_shape=(34,))) # 34 features
+    model.add(Dense(484, activation='relu', input_shape=(34,)))  # 34 features
     model.add(Dense(484, activation='relu'))
     model.add(Dropout(0.25))
     model.add(Dense(484, activation='relu'))
-    model.add(Dense(27, activation='softmax')) #when run for user 1, should have input=9
-    model.compile(loss='categorical_crossentropy',optimizer=optimizer,metrics=['accuracy'])
+    model.add(Dense(6, activation='softmax'))  # when run for user 1, should have output=9
+    model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
     return model
 
-# evaluate the network
-def model_eval(history, epochs, img_name):
-    print("Evaluating network...")
-
-    # plot the test loss and accuracy
-    N = np.arange(0, epochs,1)
-    plt.style.use("ggplot")
-    plt.figure()
-    plt.plot(N, history.history["val_loss"], label="test_loss")
-    plt.plot(N, history.history["val_accuracy"], label="test_acc")
-    plt.title("Training Loss and Accuracy (Simple NN)")
-    plt.xlabel("Epoch #")
-    plt.ylabel("Loss/Accuracy")
-    plt.legend()
-    plt.savefig(FIGURES_PATH+img_name+".png")
 
 def train(x_train, x_test, y_train, y_test):
-    decay_rate = 0.01 / 20
-    optimizer = SGD(lr=0.01, momentum=0.8, decay=decay_rate, nesterov=False)
-    model=build_and_compile_model(optimizer)
-    history = model.fit(x_train, y_train, epochs=20, batch_size=128,validation_data=(x_test, y_test), shuffle=True, verbose=1)
-    return history
+    classifier = KerasClassifier(build_fn=build_classifier, epochs=20, batch_size=128)
+    # predictions = cross_val_predict(estimator=classifier, X=x_train, y=y_train, cv=10)
+
+    accuracies = cross_val_score(estimator=classifier, X=x_train, y=y_train, cv=3)
+    mean = accuracies.mean() #we want one output accuracy, so we calculate the mean
+    variance = accuracies.std()
+    print("The mean accuracy is {} and the variance is {}".format(mean, variance))
+
+
 
 def classify(dataset_path, users=[]):
     (x_train, y_train), (x_test, y_test) = load_and_preprocess_data(dataset_path, users)
-    history = train(x_train, x_test, y_train, y_test)
-    if (utilities.allUsersAskedFor(users)):
-        model_eval(history, 20, "youtube_accuracy_allUsers")
-    elif (utilities.particularUsersAskedFor(users)):
-        model_eval(history, 20, "youtube_accuracy_users" + str(users))
+    train(x_train, x_test, y_train, y_test)
+    # history = train(x_train, x_test, y_train, y_test)
+    # if (utilities.allUsersAskedFor(users)):
+    #     model_eval(history, 20, "youtube_accuracy_allUsers")
+    # elif (utilities.particularUsersAskedFor(users)):
+    #     model_eval(history, 20, "youtube_accuracy_users" + str(users))

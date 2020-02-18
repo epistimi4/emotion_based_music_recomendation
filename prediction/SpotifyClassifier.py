@@ -48,6 +48,6 @@ def classify(dataset_path, users=[]):
     df = preprocess_datasheet(df, users)
     Y_predicted, Y_real = spotify_generate_predictions(df)
     if (utilities.allUsersAskedFor(users)):
-        utilities.plot_confusion_matrix(Y_real, Y_predicted, FIGURES_PATH+"spotify_heatmap_allUsers.png")
+        utilities.plot_confusion_matrix(Y_real.values.ravel(), Y_predicted, FIGURES_PATH+"spotify_heatmap_allUsers.png")
     elif (utilities.particularUsersAskedFor(users)):
-        utilities.plot_confusion_matrix(Y_real, Y_predicted, FIGURES_PATH+"spotify_heatmap_users"+str(users)+".png")
+        utilities.plot_confusion_matrix(Y_real.values.ravel(), Y_predicted, FIGURES_PATH+"spotify_heatmap_users"+str(users)+".png")
