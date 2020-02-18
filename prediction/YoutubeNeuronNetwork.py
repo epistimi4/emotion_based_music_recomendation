@@ -7,13 +7,18 @@ from keras.models import Sequential
 from keras.optimizers import SGD
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
+import prediction.Utilities as utilities
 
-import correlations.Utilities as utilities
+FIGURES_PATH = "prediction/figures/"
 
-
-def load_and_preprocess_data(dataset_path):
+def load_and_preprocess_data(dataset_path,users=[]):
     # Load data
     df = pd.read_csv(dataset_path)
+    df['user_id'] = df['user_id'].astype(int).astype(str)
+    if (utilities.particularUsersAskedFor(users)):
+        # ask for songs of specific user
+        df = df[df['user_id'].isin(users)]
+
     df = df.dropna(axis=0)
     predictors = [2, 6, 10, 14, 18,22,26,30,34,38,42,46,50,54,58,62,66,70,74,78,82,86,90,94,98,102,106,110,114,118,122,126,130,134]
     X = df.take(predictors, axis=1)  # predictors
@@ -32,7 +37,7 @@ def load_and_preprocess_data(dataset_path):
     x_train = x_train.astype('float32')
     x_test = x_test.astype('float32')
 
-    # scale the input image pixels to the range [0, 1]
+    # scale the input variables to the range [0, 1]
     x_train = x_train / 255.0
     x_test = x_test / 255.0
 
@@ -63,27 +68,25 @@ def build_and_compile_model(optimizer = 'adam', learn_rate=0.01, momentum=0.8):
     model.add(Dense(484, activation='relu'))
     model.add(Dropout(0.25))
     model.add(Dense(484, activation='relu'))
-    model.add(Dense(27, activation='softmax'))
+    model.add(Dense(27, activation='softmax')) #when run for user 1, should have input=9
     model.compile(loss='categorical_crossentropy',optimizer=optimizer,metrics=['accuracy'])
     return model
 
 # evaluate the network
-def model_eval(history, epochs, img_path):
+def model_eval(history, epochs, img_name):
     print("Evaluating network...")
 
-    # plot the training and test loss and accuracy
+    # plot the test loss and accuracy
     N = np.arange(0, epochs,1)
     plt.style.use("ggplot")
     plt.figure()
-    plt.plot(N, history.history["loss"], label="train_loss")
     plt.plot(N, history.history["val_loss"], label="test_loss")
-    plt.plot(N, history.history["accuracy"], label="train_acc")
     plt.plot(N, history.history["val_accuracy"], label="test_acc")
     plt.title("Training Loss and Accuracy (Simple NN)")
     plt.xlabel("Epoch #")
     plt.ylabel("Loss/Accuracy")
     plt.legend()
-    plt.savefig(img_path)
+    plt.savefig(FIGURES_PATH+img_name+".png")
 
 def train(x_train, x_test, y_train, y_test):
     decay_rate = 0.01 / 20
@@ -92,7 +95,10 @@ def train(x_train, x_test, y_train, y_test):
     history = model.fit(x_train, y_train, epochs=20, batch_size=128,validation_data=(x_test, y_test), shuffle=True, verbose=1)
     return history
 
-def classify(dataset_path):
-    (x_train, y_train), (x_test, y_test) = load_and_preprocess_data(dataset_path)
+def classify(dataset_path, users=[]):
+    (x_train, y_train), (x_test, y_test) = load_and_preprocess_data(dataset_path, users)
     history = train(x_train, x_test, y_train, y_test)
-    model_eval(history, 20, "correlations/figures/youtube.png")
+    if (utilities.allUsersAskedFor(users)):
+        model_eval(history, 20, "youtube_accuracy_allUsers")
+    elif (utilities.particularUsersAskedFor(users)):
+        model_eval(history, 20, "youtube_accuracy_users" + str(users))
