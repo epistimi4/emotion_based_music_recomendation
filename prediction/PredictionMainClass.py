@@ -1,18 +1,8 @@
 import argparse
 import sys
 
-import matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd
-import seaborn as sn
-from sklearn import model_selection
-from sklearn import preprocessing
-from sklearn.ensemble import AdaBoostClassifier
-from sklearn.metrics import accuracy_score
-from sklearn.metrics import confusion_matrix
-
-import prediction.YoutubeNeuronNetwork as ffn
 import prediction.SpotifyClassifier as sc
+import prediction.YoutubeNeuronNetwork as ffn
 
 SPOTIFY_DATASET_PATH = './Business Analysis/data/spotify_metadata_playlist.xlsx'
 YOUTUBE_DATASET_PATH = './Business Analysis/data/youtube_metadata_per_user.csv'
