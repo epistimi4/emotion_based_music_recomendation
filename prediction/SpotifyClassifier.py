@@ -1,3 +1,4 @@
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import sklearn.metrics as metrics
@@ -21,6 +22,9 @@ def preprocess_datasheet(df, users=[]):
 
     df = utilities.unify_classes(df)
     df['Class'] = df['mood'] + "_" + df['activity'] + "_" + df['period']
+
+    num_users = len(np.unique(df['user_id'].values))
+    print("{} songs listened by {} users".format(df.shape[0]-1, num_users))
     return df
 
 def balancedClassifier(df):
@@ -51,16 +55,27 @@ def balancedClassifier(df):
     print(" Balanced accuracy = ", balanced_accuracy)
     return predictions, Y
 
-def exploratory_nalysis(df):
-    print("Summarise distribution of instances across classes", df.groupby('Class').size())
+def exploratory_nalysis(df,users):
+    figure_name = FIGURES_PATH+"spotify_class_support.png"
+    if (utilities.particularUsersAskedFor(users)):
+        figure_name = FIGURES_PATH + "spotify_class_support"+str(users)+".png"
+    fig = plt.figure()
+    df['Class'].value_counts().nlargest(40).plot(kind='bar', figsize=(18,15), color='red', edgecolor='green', linewidth=1)
+    plt.title("Support for all classes")
+    plt.ylabel("Number of instances")
+    plt.xlabel("Class")
+    fig.savefig(figure_name)
+
+    print(df.groupby('Class').size())
 
 def classify(dataset_path, users=[]):
     df = pd.read_excel(dataset_path)
     df = preprocess_datasheet(df, users)
-    exploratory_nalysis(df)
+    classes = utilities.getUniqueElements(df['Class'].values)
+    exploratory_nalysis(df, users)
     # The dataset is unbalanced. We cannot use SMOTE(there are classes with one instance)
     Y_predicted, Y_real = balancedClassifier(df)
     if (utilities.allUsersAskedFor(users)):
-        utilities.plot_confusion_matrix(Y_real.values.ravel(), Y_predicted, FIGURES_PATH+"spotify_heatmap_allUsers.png")
+        utilities.plot_confusion_matrix(Y_real.values.ravel(), Y_predicted, classes, FIGURES_PATH+"spotify_heatmap_allUsers.png", 'Reds')
     elif (utilities.particularUsersAskedFor(users)):
-        utilities.plot_confusion_matrix(Y_real.values.ravel(), Y_predicted, FIGURES_PATH+"spotify_heatmap_users"+str(users)+".png")
+        utilities.plot_confusion_matrix(Y_real.values.ravel(), Y_predicted, classes, FIGURES_PATH+"spotify_heatmap_users"+str(users)+".png", 'Reds')

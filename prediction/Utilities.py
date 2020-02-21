@@ -20,13 +20,12 @@ def unify_classes(df):
     df['activity'] = df['activity'].replace({'commuting': 'other'})
     return df
 
-def plot_confusion_matrix(Y, predictions,path):
-    cf_matrix = confusion_matrix(predictions, Y)
-    classes = np.unique(Y)
-    fig = plt.figure(figsize=(50,50))
+def plot_confusion_matrix(target_test, target_pred, labels, path, color, figsize=(50,50)):
+    cf_matrix = confusion_matrix(target_pred, target_test)
+    fig = plt.figure(figsize=figsize)
     sn.set(font_scale=1.5)
-    mood_matx = sn.heatmap(cf_matrix / np.sum(cf_matrix), annot=True, xticklabels=classes, yticklabels=classes,
-                           fmt='.2%', cmap='Reds')
+    mood_matx = sn.heatmap(cf_matrix / np.sum(cf_matrix), annot=True, xticklabels=labels, yticklabels=labels,
+                           fmt='.2%', cmap=color)
     mood_matx.set_xticklabels(mood_matx.get_xticklabels(), rotation=90)
     plt.xlabel('Predicted Class')
     plt.ylabel('Real Class')
@@ -37,3 +36,6 @@ def allUsersAskedFor(users=['0']):
 
 def particularUsersAskedFor(users=['0']):
     return len(users) > 0 and users[0] != '0'
+
+def getUniqueElements(values):
+    return np.unique(values)
